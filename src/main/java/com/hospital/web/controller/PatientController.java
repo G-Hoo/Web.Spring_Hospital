@@ -19,6 +19,8 @@ import com.hospital.web.service.PatientService;
 @RequestMapping(value="/patient")
 public class PatientController {
 
+	/**/
+	
 	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
 	@Autowired PatientService service;
 	@Autowired PatientMapper mapper;
