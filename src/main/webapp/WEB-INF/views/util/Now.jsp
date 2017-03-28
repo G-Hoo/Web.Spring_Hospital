@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Document</title>
+	<title>현재 시간 출력</title>
 </head>
 <body>
-	${hello}
+	
 </body>
 </html>

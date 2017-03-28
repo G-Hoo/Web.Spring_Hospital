@@ -9,14 +9,14 @@ import lombok.Setter;
 public class PatientDTO {
 	@Getter @Setter
 	private String patID,
-				   nurID,
-				   docID,
-				   patPass,
-				   patName,
-				   patGen,
-				   patJumin,
-				   patAddr,
-				   patPhone,
-				   patEmail,
-				   patJob;
+	   nurID,
+	   docID,
+	   patPass,
+	   patName,
+	   patGen,
+	   patJumin,
+	   patAddr,
+	   patPhone,
+	   patEmail,
+	   patJob;
 }
