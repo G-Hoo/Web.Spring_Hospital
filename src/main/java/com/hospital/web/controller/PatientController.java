@@ -9,22 +9,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.hospital.web.domain.PatientDTO;
+import com.hospital.web.domain.Patient;
 import com.hospital.web.mapper.PatientMapper;
-import com.hospital.web.service.ExistService;
-import com.hospital.web.service.PatientService;
+import com.hospital.web.service.CRUD;
 
 @Controller
 @RequestMapping(value="/patient")
 public class PatientController {
-
-	/**/
 	
 	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
-	@Autowired PatientService service;
+
+	@Autowired Patient patient;
 	@Autowired PatientMapper mapper;
-	@Autowired PatientDTO patient;
 	@RequestMapping(value="/join")
 	public String goJoin(){
 		logger.info("PatientController - goJoin {}","ENTER");
@@ -46,21 +42,28 @@ public class PatientController {
 		patient.setPatID(id);
 		patient.setPatPass(password);
 	
-		ExistService ex = new ExistService(){
+		CRUD.Service ex = new CRUD.Service(){
 			@Override
-			public int exist(Object o) throws Exception {
+			public Object execute(Object o) throws Exception {
 				logger.info("=========ID ? : {}",o);
 				return mapper.exist(id);
 			}
 		};
-		int count = ex.exist(id);
+		
+		Integer count = (Integer)ex.execute(id);
 		logger.info("DB에 존재하는 여부 : {}",count);
 		String movePosition="";
 		if(count==0){
 			logger.info("DB 다녀온 결과 : {}","ID is not exist");
 			movePosition="public:common/loginForm";
 		}else{
-			patient=service.login(patient);
+			CRUD.Service service = new CRUD.Service(){
+				@Override
+				public Object execute(Object o) throws Exception {
+					return mapper.selectById(id);
+				}
+			};
+			patient=(Patient) service.execute(patient);
 			if(patient.getPatPass().equals(password)){
 				logger.info("DB 다녀온 결과 : {}","Success");
 				model.addAttribute("patient", patient);
@@ -69,7 +72,6 @@ public class PatientController {
 				logger.info("DB 다녀온 결과 : {}","Password is not match");
 				movePosition="public:common/loginForm";
 			}
-			
 			movePosition="patient:patient/containerDetail";
 		}
 		return movePosition;
