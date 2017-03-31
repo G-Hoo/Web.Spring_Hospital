@@ -181,6 +181,7 @@ public class PermissionController {
 		return movePosition;
 	}
 	
+	/*로그아웃*/
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
