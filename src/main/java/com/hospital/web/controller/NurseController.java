@@ -11,9 +11,4 @@ public class NurseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(NurseController.class);
 
-	@RequestMapping(value="/login")
-	public String goLogin(){
-		logger.info("NurseController-goLogin() {}","ENTER");
-		return "public:common/loginForm";
-	}
 }

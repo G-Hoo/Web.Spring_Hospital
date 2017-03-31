@@ -13,31 +13,6 @@
 </head>
 <body>
 <div id="wrapper" class="width_full_size" style="height: 100%">
-<div id="header" class="width_full_size position_fix" style="height: 100px" >
-	<div class="logo_box width_full_size text_center">
-		<a href="../../index.html"><img src="../../images/common/index_logo.png"></a>
-	</div>
-	<ul class="gnb width_full_size text_center bg_color_darkgray" style="height: 40px">
-		<li><a href="../common/join.html">회원가입</a></li>
-		<li><a href="../common/login.html">로그인</a><li>
-		<li><a href="../bbs/bbs_list.html">게시판</a><li>
-		<li >
-			<div class="dropdown">
-				<a href="../admin/admin.html">관리자</a>
-				<div class="dropdown_content">
-					<p><a href="">의사</a></p>
-					<p><a href="">간호사</a></p>
-					<p><a href="">환자</a></p>
-					<p><a href="">차트</a></p>
-				</div>
-			</div>
-		</li>
-		<li class="tooltip">
-			<a href="#">병원소개</a>
-			<span class="tooltiptext">구현되지 않는 기능입니다</span>
-		<li>
-	</ul>
-</div>
 <div style="height: 100px"></div>
 <div id="container" class="width_full_size" style="height: 600px">
 <!-- content begin -->

@@ -161,14 +161,14 @@
 </tr>
 <tr>
        <td>
-       <p class="color_blue">*선택항목에 동의하지 않으셔도 정상적인 서비스를 이용하실 수 있습니다.</p>
+       		<p class="color_blue">*선택항목에 동의하지 않으셔도 정상적인 서비스를 이용하실 수 있습니다.</p>
        </td>
 </tr>
 <tr>
        <td>
-       <input type="hidden" name="action" value="register"/>
-       <input type="hidden" name="page" value="main"/>
-       <input type="button" name="submitBtn" value="전송"/>
+	       <input type="hidden" name="action" value="register"/>
+	       <input type="hidden" name="page" value="main"/>
+	       <input type="button" name="submitBtn" value="전송"/>
        </td>
 </tr>
 </table>

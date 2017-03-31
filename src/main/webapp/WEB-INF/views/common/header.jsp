@@ -1,9 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div id="header" class="width_full_size position_fix" style="height: 100px" >
-	<div class="logo_box width_full_size text_center">
-		<a href="${context.path}/common/container.jsp"><img src="${context.img}/common/index_logo.png"></a>
+
+<style>
+.text_no_underline{text-decoration: none;}
+.dropdown_content>a:link, .dropdown_content>a:visited{
+    color:white;
+    text-decoration:none;
+    display:block;
+    padding:2px;
+    }
+
+.dropdown_content>a:hover, .dropdown_content>a:active{
+    color:white;
+    text-decoration:none;
+    }
+</style>
+<body >
+
+<div id="header" class="width_full_size" style="height:40px;">
+	<div class="logo width_full_size text_center" style="height:40px;">
+		<a href="${context}/home.do?action=move&page=main"><img src="${context.img}/common/index_logo.png"/></a>
 	</div>
-	<jsp:include page="../common/gnb.jsp"/>
+	
 </div>
+<div style="height:10px"></div>
 	

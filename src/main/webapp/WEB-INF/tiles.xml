@@ -33,7 +33,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
 	</definition>
 	
-	<definition name="doctor:*/*" extends="patient">
+	<definition name="doctor:*/*" extends="doctor">
 		<put-attribute name="container" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
 </tiles-definitions>

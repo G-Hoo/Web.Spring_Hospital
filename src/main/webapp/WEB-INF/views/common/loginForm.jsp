@@ -8,7 +8,7 @@
 </head>
 <body>
    <form id="loginForm">
-   <div style="position:relative; top:100px;">
+   <div style="position:relative; top:10px; height:250px;">
    <table >
       <tr>
          <td><input type="text" name="id" placeholder="input ID"/></td>
@@ -18,6 +18,11 @@
          <td></td>
       </tr>
    </table>
+    <input type="radio" name="permission" value="patient" checked>고객
+    <input type="radio" name="permission" value="doctor">의사
+    <input type="radio" name="permission" value="nurse">간호사
+	<input type="radio" name="permission" value="admin">관리자
+	
 	<input type="hidden" name="action" value="login"/>
 	<input type="hidden" name="page" value="main"/>
     <input id="btn" type="submit" value="로그인"/>  
@@ -31,8 +36,11 @@ $("#btn").on("mouseover", function(){
 $(function(){
 	var $loginForm = $('#loginForm');
 	var tab = $loginForm.find('table');
+
 	$('#loginForm input[value=로그인]').click(function(){
-		$loginForm.attr("action","${context.path}/patient/login");
+		var permission=$loginForm.find(':radio[name=permission]:checked').val();
+		alert('PERMISSION:'+permission);
+		$loginForm.attr("action","${context.path}/"+permission+"/login");
 		$loginForm.attr("method","post");
 		var idVal = tab.find('input[name=id]').val();
 		var pwVal = tab.find('input[name=pw]').val();
