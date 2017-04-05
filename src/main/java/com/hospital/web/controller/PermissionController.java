@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 import com.hospital.web.domain.Doctor;
 import com.hospital.web.domain.Info;
 import com.hospital.web.domain.Nurse;
@@ -24,6 +23,7 @@ import com.hospital.web.domain.Person;
 import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
+import com.hospital.web.service.ReadService;
 
 @Controller
 @SessionAttributes("permission")
@@ -39,7 +39,8 @@ public class PermissionController {
 	@RequestMapping(value="/{permission}/login",method=RequestMethod.POST)
 	public String login(@RequestParam("id") String id,
 			@RequestParam("pw") String password,
-			@PathVariable String permission,HttpSession session,
+			@PathVariable String permission,
+			HttpSession session,
 			Model model) throws Exception{
 		logger.info("Permission - login() {}", "POST");
 		logger.info("Permission - id, pw: {}", id+","+password);
@@ -56,28 +57,17 @@ public class PermissionController {
 	        map.put("group", patient.getGroup());
 	        map.put("key", Enums.PATIENT.val());
 	        map.put("value", id);
-	         
-			CRUD.Service ex=new CRUD.Service() {
-				@Override
-				public Object execute(Object o) throws Exception {
-					logger.info("======ID ? {} ======", o);
-					return mapper.exist(map);
-				}
-			};
-			Integer count=(Integer)ex.execute(id);
+	        
+			ReadService exist = (Map<?,?>paramMap)->mapper.exist(paramMap); //선언만 한것		
+			Integer count=(Integer)exist.execute(map);
 			logger.info("ID exist ? {}", count);
-			
+		
 			if(count==0){
 				logger.info("DB RESULT: {}", "ID not exist");
 				movePosition="public:common/loginForm";
 			}else{
-				CRUD.Service service=new CRUD.Service() {
-					@Override
-					public Object execute(Object o) throws Exception {
-						return mapper.findPatient(map);
-					}
-				};
-				patient=(Patient) service.execute(patient);
+				ReadService findPatient=(Map<?,?>paramMap)->mapper.findPatient(paramMap);
+				patient=(Patient) findPatient.execute(map);
 				if(patient.getPass().equals(password)){
 					logger.info("DB RESULT: {}", "success");
 					session.setAttribute("permission", patient);
@@ -89,6 +79,7 @@ public class PermissionController {
 				}
 			}
 			break;
+			
 		case "doctor":
 			Person<?> docPerson=new Person<Info>(new Doctor());
 			Doctor doctor=(Doctor) docPerson.getInfo();
@@ -182,9 +173,20 @@ public class PermissionController {
 	}
 	
 	/*로그아웃*/
+	
+	@RequestMapping("/delete")
+	public String delete(HttpSession session){
+		
+		return null;
+		
+	}
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	
+	
 }
