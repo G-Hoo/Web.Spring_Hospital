@@ -117,23 +117,16 @@
   </select>
   
   <select id="exist" resultType="int" parameterType="hashMap">
-    	SELECT COUNT(*) FROM ${group} WHERE ${key}=#{value}
+    	SELECT COUNT(*) FROM ${group} WHERE ${idType}=#{id}
   </select>
   
   <update id="updatePatient">
-		UPDATE ${group}
-		<set>
-			<if test="nurID != null">nur_id=#{nurID},</if>
-			<if test="docID != null">doc_id=#{docID},</if>
-			<if test="pass != null">pat_pass=#{pass},</if>
-			<if test="name != null">pat_name=#{name},</if>
-			<if test="addr != null">pat_addr=#{addr},</if>
-			<if test="phone != null">pat_phone=#{phone},</if>
-			<if test="email != null">pat_email=#{email},</if>
-			<if test="job != null">pat_job=#{job}</if>
-		</set>
-		WHERE pat_id=#{id}
-	</update>
+	  UPDATE ${group} SET
+	    pat_pass = #{pass},
+	    pat_phone = #{phone},
+	    pat_email = #{email}
+	  WHERE pat_id = #{id}
+</update>
   
   <update id="updateDoctor">
   update ${group}
@@ -158,8 +151,8 @@
   </update>
   
   <delete id="delete" parameterType="hashMap">
-  	DELETE
-  	FROM ${group}
-  	WHERE ${key} = #{value}
-  </delete>
+		DELETE 
+		FROM ${group} 
+		WHERE ${key} = #{value}
+</delete>
 </mapper>

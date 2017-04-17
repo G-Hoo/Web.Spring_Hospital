@@ -9,9 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
   <script src="${context}/resources/js/app.js"></script>
-  
-</head>
-<body>
+</head><body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -22,7 +20,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${context}/resources/img/common/evernote.png">Brand</a>
+      <a id="brand" class="navbar-brand" href="#">홍지후짱</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +32,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Algorithm <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a id="series" href="#">Series</a></li>
-            <li><a id="array" href="#">Array</a></li>
+            <li><a id="arr" href="#">Array</a></li>
             <li><a id="matrix" href="#">Matrix</a></li>
             <li><a id="math" href="#">Math</a></li>
             <li><a id="appl" href="#">Application</a></li>
@@ -62,9 +60,10 @@
   </div><!-- /.container-fluid -->
 </nav>
 <div id="wrapper">
+
 </div>
 </body>
 <script>
-	app.context.init('${context}');  // 이 라인으로 인해서 document.ready() 를 쓸 필요가 없어졌다.
+app.context.init('${context}');
 </script>  
 </html>

@@ -1,5 +1,4 @@
 
-
 DROP TABLE Chart;
 DROP TABLE Treatment;
 DROP TABLE Patient;

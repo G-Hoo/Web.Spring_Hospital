@@ -3,6 +3,8 @@ package com.hospital.web.mapper;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
+
+import com.hospital.web.domain.Admin;
 import com.hospital.web.domain.Doctor;
 import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
@@ -15,9 +17,11 @@ public interface Mapper {
 	public Patient findPatient(Map<?,?> map) throws Exception;
 	public Doctor findDoctor(Map<?,?> map) throws Exception;
 	public Nurse findNurse(Map<?,?> map) throws Exception;
+	public Admin findAdmin(Map<?,?> map) throws Exception;
 	public List<Patient> findPatients(Map<?,?> map) throws Exception;
 	public List<Doctor> findDoctors(Map<?,?> map) throws Exception;
 	public List<Nurse> findNurses(Map<?,?> map) throws Exception;
+	public List<Admin> findAdmins(Map<?,?> map) throws Exception;
 	public int updatePatient(Patient patient) throws Exception;
 	public int updateDoctor(Doctor doctor) throws Exception;
 	public int updateNurse(Nurse nurse) throws Exception;

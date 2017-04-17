@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.hospital.web.mapper.Mapper;
 
 
-@Controller
+@RestController
 @RequestMapping(value="/patient")
 public class PatientController {
 	
@@ -21,6 +23,17 @@ public class PatientController {
 		logger.info("PatientController - goJoin {}","ENTER");
 		return "public:patient/registerForm";
 	}
+	
+	@RequestMapping(value="/goUpdate")
+	public String goUpdate(){
+	      logger.info("PatientController - goUpdate {}","ENTER");
+	      return "public:patient/updateForm";
+	   }
+	 @RequestMapping(value="/goDelete")
+	 public String goDelete(){
+	      logger.info("PatientController - goDelete {}","ENTER");
+	      return "public:patient/deleteForm";
+	   }
 	
 	@RequestMapping(value="/doctor/{docID}")
 	public String getDoctorInfo(@PathVariable String docID){

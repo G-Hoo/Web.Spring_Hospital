@@ -4,6 +4,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 @FunctionalInterface
-public interface UpdateService {
+public interface IPutService {
 	public int execute(Object o) throws Exception;
 }
