@@ -32,26 +32,19 @@ public class PersonController {
 	@Autowired Nurse nurse;
 	@Autowired PersonService personService;
 	@SuppressWarnings("rawtypes")
-	@RequestMapping(value="/post/{group}",
+	
+	/*회원가입*/
+	@RequestMapping(value="/post/patient",
 					method=RequestMethod.POST,
 					consumes="application/json")
-	/*회원가입*/
 	public @ResponseBody Map<?,?> register(
-			@PathVariable String group,
-			@RequestBody Person target,
-			Command command) throws Exception{
+			@RequestBody Patient p) throws Exception{
 		logger.info("PersonController-register() {} !!", "ENTER");
-		Map<?,?>map=new HashMap<>();
-		switch (group) {
-		case "patient":map=personService.postPatient(target);break;
-		case "doctor":map=personService.postDoctor(target);break;
-		case "nurse":map=personService.postNurse(target);break;
-		case "admin":map=personService.postAdmin(target);break;
-		default:
-			break;
-		}
+		Map<String,String>map=new HashMap<>();
+		map.put("name",p.getName());
 		return map;
 	}
+	
 	/*정보조회*/
 	@RequestMapping("/get/{group}/{target}")
 	// get/patient/Ahri
@@ -88,12 +81,13 @@ public class PersonController {
 		return o;
 	}
 	
+	/*로그인*/
 	@RequestMapping(value="/login",
 	         method=RequestMethod.POST,
 	         consumes="application/json")
 	   public @ResponseBody Map<?,?> login(
 	      @RequestBody Map<String,String>paramMap) throws Exception{
-	      Map<String,String>map=new HashMap<>();
+	      Map<String,Object>map=new HashMap<>();
 	      logger.info("PersonController-login() {} !!", "ENTER");
 	      String id=paramMap.get("id");
 	      String pass=paramMap.get("pass");
@@ -130,8 +124,7 @@ public class PersonController {
 	        	paramMap.put("key", arr[1]);
 	        	paramMap.put("value", arr[2]);
 	            Patient patient=personService.getPatient(paramMap);
-	            map.put("name", patient.getName());
-	            map.put("group", "고객");
+	            map.put("patient", patient);
 	            break;
 	         default:
 	            break;
@@ -139,6 +132,7 @@ public class PersonController {
 	      }
 	      return map;
 	   }
+	
 	/*리스트*/
 	@RequestMapping(value="/list/{group}",
 					method=RequestMethod.POST,

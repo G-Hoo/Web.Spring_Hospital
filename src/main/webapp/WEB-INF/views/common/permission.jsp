@@ -92,6 +92,31 @@
    text-transform: uppercase;
    border-color: #1CB94A;
 }
+
+.btn-addr {
+   background-color: #e21212;
+   outline: none;
+   color: #fff;
+   font-size: 14px;
+   height: auto;
+   font-weight: normal;
+   padding: 14px 0;
+   text-transform: uppercase;
+   border-color: #e21212;
+}
+
+#btn-confirm {
+   background-color: skyblue;
+   color: white;
+   font-size: 14px;
+   width:100%;
+   height: auto;
+   font-weight: normal;
+   padding: 14px 0;
+   text-transform: uppercase;
+   border:none;
+}
+
 .btn-register:hover,
 .btn-register:focus {
    color: #fff;
@@ -132,7 +157,8 @@
                            <div class="form-group">
                               <div class="row">
                                  <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="button" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                    <input type="button" name="login-submit" id="login-submit" tabindex="4" 
+                                    class="form-control btn btn-login" value="Log In">
                                  </div>
                               </div>
                            </div>
@@ -146,26 +172,75 @@
                               </div>
                            </div>
                         </form>
+                        
                          <form id="register-form" role="form" style="display: none;">
-                           <div class="form-group">
-                              <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+	                         <div style=position:relative;left:135px;>
+		                         <input type="radio" name="group" value="patient" checked="checked"> 고객
+		  						 <input type="radio" name="group" value="doctor"> 의사
+		  						 <input type="radio" name="group" value="nurse"> 간호사
+		                         <input type="radio" name="group" value="admin"> 관리자<br/><br/>
+	                         </div>
+	                         
+	                         
+	                           <div class="form-group">
+	                              <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+	                           </div>
+
+	                           <div class="form-group">
+	                              <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+	                           </div>
+	                           
+	                           <div class="form-group">
+	                              <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" 
+	                              placeholder="Confirm Password">
+	                           </div>
+	                           
+	                           <div class="form-group">
+	                              <input type="button" name="btn-confirm" id="btn-confirm" value="Confirm"/>
+	                           </div>
+	                           
+	                           <div style=position:relative;left:225px;>
+	                           	   <input type="radio" name="gen" value="male"checked="checked"> 남
+	                           	   <input type="radio" name="gen" value="female"> 여<br/><br/>
+	                           </div>
+	                           
+	                           <div class="form-group">
+	                              <input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="name" value="">
+	                           </div>
+	                           
+	                           <div class="form-group">
+	                              <input type="text" name="phone" id="phone" tabindex="1" class="form-control" placeholder="Phone" value="">
+	                           </div>
+	                           
+	                           <div class="form-group">
+	                              <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+	                           </div>
+	                           
+	                           <div id="incommon-info">
+		                           <div class="form-group">
+		                              <input type="text" name="job" id="job" tabindex="1" class="form-control" placeholder="Job" value="">
+		                           </div>
+		                           
+		                           <div class="form-group">
+		                              <input type="text" name="birth" id="birth" tabindex="1" class="form-control" placeholder="Birth" value="">
+		                           </div>
+		                           
+		                           <span style="display:inline-block; width:100px">우편번호</span><input type="text" name="" class="postcodify_postcode5" value="" />
+								   <button id="postcodify_search_button" style="background-color:skyblue; width:80px; height:40px; border:none; color:white;">검색</button><br/>
+								   <span style="display:inline-block; width:100px">도로명주소</span><input type="text" name="" class="postcodify_address" value="" /><br/>
+							       <span style="display:inline-block; width:100px">상세주소</span><input type="text" name="" class="postcodify_details" value="" /><br />
+							       <span style="display:inline-block; width:100px">참고항목</span><input type="text" name="" class="postcodify_extra_info" value="" /><br/><br/>
+		                           
+		                           <div class="form-group">
+		                              <div class="row">
+		                                 <div class="col-sm-6 col-sm-offset-3">
+		                                    <input type="submit" name="register-patient" id="register-patient" tabindex="4" 
+		                                    class="form-control btn btn-register" value="Register Now">
+		                                 </div>
+		                              </div>
+	                        	   </div>
                            </div>
-                           <div class="form-group">
-                              <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-                           </div>
-                           <div class="form-group">
-                              <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-                           </div>
-                           <div class="form-group">
-                              <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-                           </div>
-                           <div class="form-group">
-                              <div class="row">
-                                 <div class="col-sm-6 col-sm-offset-3">
-                                    <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
-                                 </div>
-                              </div>
-                           </div>
+                           
                         </form> 
                      </div>
                   </div>
@@ -176,5 +251,5 @@
    </div>
 </div>
 <script>
-app.login.execute();
+app.permission.execute();
 </script>
