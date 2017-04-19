@@ -727,6 +727,30 @@ app.permission=(function(){
 						 $('#gen').text(data.patient.gen);
 						 $('#phone').text(data.patient.phone);
 						 $('#addr').text(data.patient.addr);
+						 $('#btn-default').on('click',function(e){
+							 e.preventDefault();
+							 alert('차트가기 버튼 클릭');
+							 $.ajax({
+								 url : context+'/get/chart',
+								 method : 'POST',
+							     data : JSON.stringify({id : 'xxx'}),
+							     dataType : 'json',
+							     contentType : 'application/json',
+							     success : function(data){
+							    	 /*$('#wrapper').html(app.ui.patientGnb());
+							    	 $('#wrapper').append(app.ui.chart());
+							    	 alert(data.chart);*/
+							    	 if(data.result==='fail'){
+							    		 alert('차트 없음');
+							    	 }else{
+							    		 alert('차트 있음');
+							    	 }
+							     },
+							     error : function(xhr,status,msg){
+							    	 alert('차트가기 실패 이유 :'+msg);
+							     }
+							 });
+						 });
 					 }else{
 						 alert('조회된 ID 가 존재하지 않습니다.');
 					 }
@@ -777,13 +801,13 @@ app.permission=(function(){
 						url : context+'/post/patient',
 						method : 'POST',
 						data : JSON.stringify(json),
-						 dataType: "json",
-						 contentType: 'application/json',
+						dataType: "json",
+						contentType: 'application/json',
 						success : function(data){
 							alert('회원가입 성공 .. 로그인 바랍니다');
 							location.reload();
 						},
-						error : function(xhr,status,msg){alert('환자등록 시'+msg);}
+						error : function(xhr,status,msg){alert('환자등록 실패'+msg);}
 					});
 			}else{
 				alert('반드시 입력될 값이 비워져 있습니다');
@@ -990,6 +1014,57 @@ app.ui={
 			+     '<input type="button" style="margin-top:20px" id="btn-default" class="btn btn-default" value="차트 보기"/>'
 			+'</div>'
 			return detail;
+		},
+		chart : function(){
+			var image = app.session.getImagePath();
+			$("<div></div>").attr('id','div-chart').appendTo('#wrapper');
+			$('#div-chart').css('width','80%').css('margin-top','50px').addClass('app-margin-center');
+			$("<div></div>").attr('id','app-chart-top').appendTo('#div-chart');
+			
+			var table=
+				'<table>'
+				+'<tr><td rowspan="5" style="width:100px">환<br/>자<br/>정<br/>보</td><td class="app-chart-table-elem">이름</td><td colspan="3" class="app-chart-top-table"></td><td class="app-chart-table-elem">직업</td><td class="app-chart-top-table"></td></tr>'
+				+'<tr><td class="app-chart-table-elem">생년월일</td><td class="app-chart-top-table"></td><td class="app-chart-col-table">키</td><td class="app-chart-top-table"></td><td class="app-chart-table-elem">직업</td><td class="app-chart-top-table"></td></tr>'       
+				+'<tr><td class="app-chart-table-elem">성별</td><td colspan="3" class="app-chart-top-table"></td><td class="app-chart-table-elem">몸무게</td><td class="app-chart-top-table"></td></tr>'
+			    +'<tr><td class="app-chart-table-elem">전화번호</td><td colspan="3" class="app-chart-top-table"></td><td class="app-chart-table-elem">혈액형</td><td class="app-chart-top-table"></td></tr>'
+			    +'<tr><td class="app-chart-table-elem">주소</td><td colspan="3" class="app-chart-top-table"></td><td class="app-chart-table-elem">주치의</td><td class="app-chart-top-table"></td></tr>'
+				+'</table>';			 
+			$(table).attr('id','app-chart-top-table').appendTo('#app-chart-top');
+			$('#app-chart-top-table').css('width','800px');
+			$('#app-chart-top').addClass('app-chart-top').css('text-align','center');
+			$("<div></div>").attr('id','app-chart-center').appendTo('#app-chart-top');
+			$('#app-chart-center').addClass('app-chart-center');
+			var fileUpload=
+				'<form id="form-file-upload" name="form-file-upload" method="post"'
+				+ 'action="" enctype="multipart/form-data">'
+				+'<input type="file" id="file" name="file"/>'
+				+'<input type="submit" id="btn-file-upload" value="파일업로드">'
+				+'</form>';
+			$('#app-chart-center').html(
+				'<div class="app-chart-center-center" style="text-align:left;">처방전'+
+			        '<br/>'+
+			        '<img src="'+image+'/common/defaultimg.jpg" style="width:200px; height:200px; float:left;"/>'+
+			    '</div>	'+fileUpload);
+			$('#form-file-upload').css('margin-top','20px');
+			$("<div></div>").attr('id','app-chart-bottom').appendTo('#app-chart-center');
+			$('<table><thead id="thead"></thead><tbody id="tbody"></tbody></table>').attr('id','app-chart-bottom-table').appendTo('#app-chart-bottom');
+			var row = '<tr>';
+			var arr=['순서','진료일','진료 NO','담당의사','직책','진료과목','병명','처방내역'];
+			for(var i=0;i<8;i++){
+				row+='<th>'+arr[i]+'</th>';
+			}
+			row+='</tr>';
+			$('#thead').html(row);
+			var row = '<tr>';
+			for(var i=0;i<8;i++){
+				row+='<td>'+'example'+'</td>';
+			}
+			row+='</tr>';
+			$('#tbody').html(row);
+			$('#thead th').addClass('app-chart-table-elem').addClass('app-text-center');
+			$('#tbody td').addClass('app-chart-table-elem').addClass('app-text-center');
+			$('#app-chart-bottom-table').css('margin-top','20px').addClass('app-chart-bottom-table');
+		
 		}
 };
 /*
